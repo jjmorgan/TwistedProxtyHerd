@@ -1,0 +1,60 @@
+Twisted Twitter Proxy Herd - Prototype
+Justin Morgan
+403912414
+
+=============
+
+- To initialize all servers, run the shell script launch.sh:
+
+  $ ./launch.sh
+
+  Individual servers can also be opened using any of the
+  following commands:
+
+  $ python blake.py
+  $ python bryant.py
+  $ python howard.py
+  $ python gasol.py
+  $ python metta.py
+
+- To communicate with any of the servers, connect via TCP
+  to localhost on any port between 12460 - 12464, using a
+  client such as telnet:
+
+  12460 -> Blake
+  12461 -> Bryant
+  12462 -> Howard
+  12463 -> Gasol
+  12464 -> Metta
+
+  Ports 12465 - 12469 are reserved for connections between 
+  neighboring proxy servers.
+
+- Each server maintains its own log file, in the format
+  <ServerName>.txt. These logs are appened to on each
+  event, and are not cleared automatically on shutdown.
+
+  To view log updates in real time, use the following
+  command, for instance:
+
+  $ tail -f Blake.txt
+
+- To shutdown any or all servers, use any of the following
+  commands (shutdown.py waits exactly one second before
+  ending execution to ensure that all servers are shut down):
+
+  $ python shutdown.py all
+
+  or
+
+  $ python shutdown.py blake
+  $ python shutdown.py bryant
+  $ python shutdown.py howard
+  $ python shutdown.py gasol
+  $ python shutdown.py metta
+
+  When relaunching Howard or Bryant, please wait at least
+  ten seconds before sending IAMAT or WHATSAT queries, as
+  the other servers are configured to reconnect with servers
+  with exponential delay with respect to time, in order
+  to decrease reconnection overhead.
